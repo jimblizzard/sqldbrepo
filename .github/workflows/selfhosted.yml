@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Update Database via selfhosted.yml
 
 # Controls when the workflow will run
 on:
@@ -16,7 +16,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  deploy:
     # The type of runner that the job will run on
     runs-on: [self-hosted, windows, x64]
 
@@ -35,10 +35,6 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
-      # Setup MSBuild
-      #- name: setup-msbuild
-      #  uses: microsoft/setup-msbuild@v1
-      
       # deploy the DACPAC
       - name: Deploy database updates
         working-directory: c:\program files\Microsoft SQL Server\150\DAC\bin\
