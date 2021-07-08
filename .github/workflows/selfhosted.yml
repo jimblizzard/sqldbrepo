@@ -39,6 +39,6 @@ jobs:
       # deploy the DACPAC
       - name: Deploy database updates
         #working-directory: c:\program files\Microsoft SQL Server\150\DAC\bin\
-        run: c:\DAC\bin\sqlpackage.exe /Action:Publish /SourceFile:".\AdventureWorksProject\AdventureWorksProject.dacpac" /TargetDatabaseName:AdventureWorks2019 /TargetServerName:"localhost"
+        run: c:\DAC\bin\sqlpackage.exe /Action:Publish /SourceFile:".\AdventureWorksProject\AdventureWorksProject.dacpac" /TargetDatabaseName:AdventureWorks2019 /TargetServerName:"localhost" /TargetUser:"blizz" /TargetPassword:"$99db99$$99db"
     
     
