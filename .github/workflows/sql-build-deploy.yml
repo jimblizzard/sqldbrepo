@@ -19,7 +19,7 @@ jobs:
   buildDeploy:
   
     # use a self-hosted windows runner
-    runs-on: [self-hosted]
+    runs-on: [self-hosted, windows, x64]
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
