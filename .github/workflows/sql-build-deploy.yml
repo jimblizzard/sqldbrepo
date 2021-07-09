@@ -35,10 +35,9 @@ jobs:
       # build the sql project 
       - name: build the sqlproj
         run: |
-          msbuild.exe .\Adventureworksproject\Database1\Database1.sqlproj /p:DeployOnBuild=true /p:publishUrl="c:\builds"
+          msbuild.exe .\Adventureworksproject\Database1\Database1.sqlproj /p:DeployOnBuild=true 
 
-      # Runs a set of commands using the runners shell
-      #- name: Run a multi-line script
-      #  run: |
-      #    echo Add other actions to build,
-      #    echo test, and deploy your project.
+      # deploy the DACPAC
+      - name: Deploy database updates
+        #working-directory: c:\program files\Microsoft SQL Server\150\DAC\bin\
+        run: c:\DAC\bin\sqlpackage.exe /Action:Publish /SourceFile:".\Adventureworksproject\Database1\bin\Debug\Database1.dacpac" /TargetDatabaseName:AdventureWorks2019 /TargetServerName:"ghselfhost-vm" /TargetUser:"forpipeline" /TargetPassword:"abc123"
