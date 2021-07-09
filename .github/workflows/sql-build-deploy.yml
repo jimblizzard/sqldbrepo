@@ -1,4 +1,4 @@
-# This is a basic workflow to help you get started with Actions
+# build and deploy a dacpac to a target database
 
 name: sql-build-deploy
 
@@ -15,20 +15,21 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+
   buildDeploy:
-    # The type of runner that the job will run on
+  
+    # use a self-hosted windows runner
     runs-on: [self-hosted]
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      # this step adds the msbuild path into the gh workflow context
       - name: setup msbuild
         uses: microsoft/setup-msbuild@v1
 
-      # where are we?
+      # for debugging, take a look at where we are in the file system
       - name: where are we
         run: dir
 
@@ -39,5 +40,4 @@ jobs:
 
       # deploy the DACPAC
       - name: Deploy database updates
-        #working-directory: c:\program files\Microsoft SQL Server\150\DAC\bin\
         run: c:\DAC\bin\sqlpackage.exe /Action:Publish /SourceFile:".\Adventureworksproject\Database1\bin\Debug\Database1.dacpac" /TargetDatabaseName:AdventureWorks2019 /TargetServerName:"ghselfhost-vm" /TargetUser:"forpipeline" /TargetPassword:"abc123"
