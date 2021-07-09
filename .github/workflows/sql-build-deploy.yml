@@ -40,4 +40,10 @@ jobs:
 
       # deploy the DACPAC
       - name: Deploy database updates
-        run: c:\DAC\bin\sqlpackage.exe /Action:Publish /SourceFile:".\Adventureworksproject\Database1\bin\Debug\Database1.dacpac" /TargetDatabaseName:AdventureWorks2019 /TargetServerName:"ghselfhost-vm" /TargetUser:"forpipeline" /TargetPassword:"abc123"
+        run: |
+          c:\DAC\bin\sqlpackage.exe /Action:Publish \
+            /SourceFile:".\Adventureworksproject\Database1\bin\Debug\Database1.dacpac" \
+            /TargetDatabaseName:AdventureWorks2019 \
+            /TargetServerName:"ghselfhost-vm" \
+            /TargetUser:"forpipeline" \
+            /TargetPassword:${{ secrets.DB_PWD}}
